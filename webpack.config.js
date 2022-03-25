@@ -1,5 +1,5 @@
 const path = requiere('path')
-const HtmlWwebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html"
+      template: 'index.html'
     })
   ],
   module: {
@@ -47,7 +47,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|mp4)$/i,
         loader: 'file-loader',
         options: {
-          outputPath: 'images',
+          outputPath: 'images'
         }
       }
     ]
