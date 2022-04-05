@@ -1,0 +1,9 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: SteinsFont;
+    src: url(./assets/Garamond-Font/Garamond\ Bold\ Italic.ttf);
+  }
