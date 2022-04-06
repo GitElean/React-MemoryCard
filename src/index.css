@@ -7,3 +7,20 @@
     font-family: SteinsFont;
     src: url(./assets/Garamond-Font/Garamond\ Bold\ Italic.ttf);
   }
+
+.text-steins{
+  @apply text-xl text-slate-300 font-semibold font-steins
+}
+
+.text-steins2{
+  @apply text-xl text-slate-800 font-semibold font-steins
+}
+
+.button-s{
+  @apply font-bold font-steins bg-slate-900 hover:bg-slate-600 text-white py-2 px-4 rounded-t-md 
+}
+
+.container{
+  @apply bg-gradient-to-r bg-gray-400 rounded-xl text-center sm:text-left sm:flex-grow border-8 border-double
+  border-slate-500 shadow-md drop-shadow-sm
+}

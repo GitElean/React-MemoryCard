@@ -5,7 +5,8 @@
         "node": true
     },
     "extends": [
-        "standard"
+        "airbnb",
+        "airbnb/hooks"
     ],
     "parserOptions": {
         "ecmaVersion": "latest",

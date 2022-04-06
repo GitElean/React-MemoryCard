@@ -1,23 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import wing from './assets/imagen.png';
 import kurisu from './assets/kurisu.png';
+import okabe from './assets/okabe.png';
+import daru from './assets/daru.png';
+import faris from './assets/faris.png';
+import luka from './assets/luka.png';
+import mayuri from './assets/mayuri.png';
+import moeka from './assets/moeka.png';
+import suzuha from './assets/suzuha.png';
+
+const cards = [
+  { labMember: kurisu },
+  { labMember: okabe },
+  { labMember: daru },
+  { labMember: faris },
+  { labMember: luka },
+  { labMember: mayuri },
+  { labMember: moeka },
+  { labMember: suzuha },
+];
 
 function App() {
-  return (
-    <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden ">
-      <div className="sm:flex sm:items-center px-6 py-4">
-        <img className="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src="https://avatars.githubusercontent.com/u/10122431?s=400&v=4" alt="" />
-        <div className="text-center sm:text-left sm:flex-grow">
-          <div className="mb-4 bg-gray-50">
-            <img alt="amadeus" src={wing} />
-            <img alt="kurisu" src={kurisu} />
+  const [cardsAct, setted] = useState([]);
+  const [turns, setTurns] = useState(0);
 
-            <p className="text-xl leading-tight">John Doe</p>
-            <p className="text-sm leading-tight text-grey-dark">Contributor at somerepo</p>
-          </div>
-          <div>
-            <button type="button" className="text-xs font-semibold rounded-full px-4 py-1 leading-normal bg-white border border-purple text-purple hover:bg-purple hover:text-white">Message</button>
-          </div>
+  const shuffle = () => {
+    const shuffled = [...cards, ...cards].sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random() }));
+
+    setted(shuffled);
+    setTurns(0);
+  };
+  console.log(cardsAct, turns);
+  return (
+    <div className="h-screen w-screen bg-black sm:flex sm:items-center justify-center">
+      <div className="container h-5/6 w-11/12 pr-20">
+        <div className=" w-5/6 justify-center text-center">
+          <h1 className="text-steins">Memoria de Convergencia </h1>
+        </div>
+        <div className="top-0 right-1 w-1/6 h-full border-4 border-double border-slate-500 text-center flex flex-col fixed">
+          <button onClick={shuffle} className="button-s" type="button" alt="iniciar juego">Empezar partida</button>
+          <h1 className="text-steins">Intentos:</h1>
+          <h1 className="text-steins">Convergencia:</h1>
+          <h1 className="text-steins">Miembros:</h1>
+          <ul><li className="text-steins2">a</li></ul>
+        </div>
+        <div className="grid">
+          {cardsAct.map((card) => (
+            <div className="card" key={cardsAct.id}>
+              <div>
+                <img className="labmember" alt="labmember" src={cardsAct.labMember} />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

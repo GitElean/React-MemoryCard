@@ -33,4 +33,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({ template: './src/index.html' }),
   ],
+  resolve: {
+    extensions: ['.js', '.json', '.jsx']
+  },
 };
