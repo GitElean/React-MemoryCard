@@ -8,6 +8,8 @@ import mayuri from './assets/mayuri.png';
 import moeka from './assets/moeka.png';
 import suzuha from './assets/suzuha.png';
 import Cardunit from './components/cardUnit';
+import winImg from './assets/win.png';
+import Gear from './components/gear';
 
 const cards = [
   { labMember: kurisu, match: false },
@@ -20,12 +22,17 @@ const cards = [
   { labMember: suzuha, match: false },
 ];
 
+const convergency = [
+  {convergency: 0 },
+];
+
 function App() {
   const [cardsAct, setted] = useState([]);
   const [turns, setTurns] = useState(0);
   const [firstCard, setFirstCard] = useState(null);
   const [secondCard, setSecondCard] = useState(null);
   const [deactivate, setDeactivate] = useState(false);
+  const [win, setWin] = useState(false);
 
   const shuffle = () => {
     const shuffled = [...cards, ...cards].sort(() => Math.random() - 0.5)
@@ -65,10 +72,42 @@ function App() {
     }
   }, [firstCard, secondCard]);
 
+  useEffect(() => {
+    setWin(cardsAct.every((card) => card.match));
+  }, [cardsAct]);
+
+  useEffect(() => {
+    console.log(win);
+  }, [win]);
+
+  const winS = () => {
+    let flag = true;
+    let cont = 0;
+    cardsAct.forEach((card) => {
+      if (card.match === true) {
+        cont += 1;
+        if (cont !== cardsAct.length) {
+          flag = false;
+        }
+      }
+    });
+    setWin(flag);
+  };
+
   console.log(turns);
+  console.log(winS);
   return (
     <div className="h-screen w-screen bg-black sm:flex sm:items-center justify-center">
       <div className="container h-5/6 w-11/12 pr-20 bg-gray-400">
+        <div className="h-10 w-10 fill-black animate-spin duration-1000 absolute top-0 right-10">
+          <Gear />
+        </div>
+        <div className="h-10 w-10 fill-black animate-spin duration-1000 absolute top-10 right-0">
+          <Gear />
+        </div>
+        <div className="h-16 w-16 fill-black animate-spin duration-1000 absolute top-0 left-0">
+          <Gear />
+        </div>
         <div className=" w-full justify-center text-center">
           <h1 className="text-steins2">Memoria de Convergencia </h1>
         </div>
@@ -89,7 +128,7 @@ function App() {
             </tr>
           </table>
         </div>
-        <div className="grid pr-11">
+        <div className="grid pl-11 pb-8">
           {cardsAct.map((card) => (
             <Cardunit
               key={card.id}
@@ -97,8 +136,18 @@ function App() {
               cardChoice={cardChoice}
               flip={card === firstCard || card === secondCard || card.match === true}
               deactivate={deactivate}
+              win
             />
           ))}
+        </div>
+        <div className="absolute top-0 right-0 w-screen h-screen pointer-events-none flex pt-5 justify-center">
+          {win
+            && (
+            <div className="">
+              <img src={winImg} alt="victoria" />
+              <h1 className="text-white">¡Has llegado a la línea tempora Steins;Gate!</h1>
+            </div>
+            )}
         </div>
       </div>
     </div>

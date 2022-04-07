@@ -44,3 +44,11 @@
 .flip .labmember{
   @apply rotate-0 visible delay-150 duration-200
 }
+
+.win .false{
+  @apply invisible
+}
+
+.win .true{
+  @apply visible duration-1000 absolute
+}
