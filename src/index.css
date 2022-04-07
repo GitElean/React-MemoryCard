@@ -13,7 +13,7 @@
 }
 
 .text-steins2{
-  @apply text-xl text-slate-800 font-semibold font-steins
+  @apply text-xl text-black font-semibold font-steins
 }
 
 .button-s{
@@ -21,7 +21,7 @@
 }
 
 .container{
-  @apply bg-gradient-to-r bg-gray-400 rounded-xl text-center sm:text-left sm:flex-grow border-8 border-double
+  @apply bg-gradient-to-r rounded-xl text-center sm:text-left sm:flex-grow border-8 border-double
   border-slate-500 shadow-md drop-shadow-sm
 }
 
@@ -34,5 +34,13 @@
 }
 
 .card img{
-  @apply w-32 h-40 border-4 rounded-xl border-slate-300
+  @apply w-32 h-40 border-4 rounded-xl border-slate-300 
+}
+
+.card .labmember{
+  @apply rotate-180 absolute invisible delay-150 duration-200
+}
+
+.flip .labmember{
+  @apply rotate-0 visible delay-150 duration-200
 }

@@ -10,6 +10,11 @@ module.exports = {
       fontFamily: {
         steins: ['SteinsFont', 'Garamond-font'],
       },
+      colors: {
+        brown: {
+          50: '#ad853e',
+        },
+      },
     },
   },
   variants: {},

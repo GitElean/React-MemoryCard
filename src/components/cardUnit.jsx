@@ -2,14 +2,18 @@ import '../index.css';
 import React from 'react';
 import wing from '../assets/imagen.png';
 
-function Cardunit({ card, cardChoice }) {
+function Cardunit({
+  card, cardChoice, flip, deactivate,
+}) {
   const clickTask = () => {
-    cardChoice(card);
+    if (!deactivate) {
+      cardChoice(card);
+    }
   };
 
   return (
     <div className="card">
-      <div>
+      <div className={flip ? 'flip' : ''}>
         <img className="labmember" alt="lab member" src={card.labMember} />
         <img
           className="backcard"

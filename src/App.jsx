@@ -25,6 +25,7 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [firstCard, setFirstCard] = useState(null);
   const [secondCard, setSecondCard] = useState(null);
+  const [deactivate, setDeactivate] = useState(false);
 
   const shuffle = () => {
     const shuffled = [...cards, ...cards].sort(() => Math.random() - 0.5)
@@ -42,16 +43,24 @@ function App() {
     setFirstCard(null);
     setSecondCard(null);
     setTurns((turnscont) => turnscont + 1);
+    setDeactivate(false);
   };
 
   useEffect(() => {
     if (firstCard && secondCard) {
+      setDeactivate(true);
       if (firstCard.labMember === secondCard.labMember) {
-        console.log('match');
+        setted((prevCards) => prevCards.map((card) => {
+          if (card.labMember === firstCard.labMember) {
+            return { ...card, match: true };
+          }
+          return card;
+        }));
         newTurn();
       } else {
-        console.log('dont match');
-        newTurn();
+        setTimeout(() => {
+          newTurn();
+        }, 1500);
       }
     }
   }, [firstCard, secondCard]);
@@ -59,27 +68,35 @@ function App() {
   console.log(turns);
   return (
     <div className="h-screen w-screen bg-black sm:flex sm:items-center justify-center">
-      <div className="container h-5/6 w-11/12 pr-20">
-        <div className=" w-5/6 justify-center text-center">
-          <h1 className="text-steins">Memoria de Convergencia </h1>
+      <div className="container h-5/6 w-11/12 pr-20 bg-gray-400">
+        <div className=" w-full justify-center text-center">
+          <h1 className="text-steins2">Memoria de Convergencia </h1>
         </div>
-        <div className="top-0 right-1 w-1/6 h-full border-4 border-double border-slate-500 text-center flex flex-col fixed">
+        <div className="right-0 bottom-1 w-full h-1/6 border-4 border-double border-slate-500 text-center flex flex-col fixed bg-brown-50">
           <button onClick={shuffle} className="button-s" type="button" alt="iniciar juego">Empezar partida</button>
-          <h1 className="text-steins">
-            Intentos:
-            {' '}
-            {turns}
-          </h1>
-          <h1 className="text-steins">Convergencia:</h1>
-          <h1 className="text-steins">Miembros:</h1>
-          <ul><li className="text-steins2">a</li></ul>
+          <table>
+            <tr>
+              <th>
+                <h1 className="text-steins">
+                  Intentos:
+                  {' '}
+                  {turns}
+                </h1>
+              </th>
+              <th>
+                <h1 className="text-steins">Convergencia:</h1>
+              </th>
+            </tr>
+          </table>
         </div>
-        <div className="grid">
+        <div className="grid pr-11">
           {cardsAct.map((card) => (
             <Cardunit
               key={card.id}
               card={card}
               cardChoice={cardChoice}
+              flip={card === firstCard || card === secondCard || card.match === true}
+              deactivate={deactivate}
             />
           ))}
         </div>
