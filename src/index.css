@@ -24,3 +24,15 @@
   @apply bg-gradient-to-r bg-gray-400 rounded-xl text-center sm:text-left sm:flex-grow border-8 border-double
   border-slate-500 shadow-md drop-shadow-sm
 }
+
+.grid{
+  @apply grid-cols-8 gap-3 mt-8 
+}
+
+.card{
+  @apply relative bg-opacity-50 bg-stone-600 rounded-xl
+}
+
+.card img{
+  @apply w-32 h-40 border-4 rounded-xl border-slate-300
+}
