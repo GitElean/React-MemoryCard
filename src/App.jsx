@@ -22,10 +22,6 @@ const cards = [
   { labMember: suzuha, match: false },
 ];
 
-const convergency = [
-  {convergency: 0 },
-];
-
 function App() {
   const [cardsAct, setted] = useState([]);
   const [turns, setTurns] = useState(0);
@@ -33,6 +29,7 @@ function App() {
   const [secondCard, setSecondCard] = useState(null);
   const [deactivate, setDeactivate] = useState(false);
   const [win, setWin] = useState(false);
+  const [convergencia, setConvergencia] = useState(0);
 
   const shuffle = () => {
     const shuffled = [...cards, ...cards].sort(() => Math.random() - 0.5)
@@ -40,6 +37,14 @@ function App() {
 
     setted(shuffled);
     setTurns(0);
+  };
+
+  const conver = () => {
+    let ret = Math.random() * 1.7;
+    if (win === true) {
+      ret = 1.048596;
+    }
+    setConvergencia(ret);
   };
 
   const cardChoice = (card) => {
@@ -123,7 +128,12 @@ function App() {
                 </h1>
               </th>
               <th>
-                <h1 className="text-steins">Convergencia:</h1>
+                <h1 className="text-steins">
+                  Convergencia:
+                  {' '}
+                  {convergencia}
+                  %
+                </h1>
               </th>
             </tr>
           </table>
@@ -136,7 +146,6 @@ function App() {
               cardChoice={cardChoice}
               flip={card === firstCard || card === secondCard || card.match === true}
               deactivate={deactivate}
-              win
             />
           ))}
         </div>
